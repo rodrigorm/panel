@@ -39,15 +39,15 @@ A maneira mais fácil de utilizar o plugin é primeiro ativar o behavior na clas
 
 <pre><code>class AppModel extends Model {
 	public $actsAs = array(
-		'Admin.AdminCrud'
+		'Panel.AdminCrud'
 	);
 }</code></pre>
 
-Em seguida pra cada controller que desejar um CRUD basta extender a classe AdminAppController:
+Em seguida pra cada controller que desejar um CRUD basta extender a classe PanelAppController:
 
-<pre><code>App::import('Controller', 'Admin.App');
+<pre><code>App::import('Controller', 'Panel.App');
 
-class UsersController extends AdminAppController {}
+class UsersController extends PanelAppController {}
 </code></pre>
 
 Agora é só criar as views manualmente ou utilizando o @bake@.
@@ -60,9 +60,9 @@ Este behavior provê métodos para o CRUD do painel de controle:
 # @adminEdit@
 # @adminValidateAndDelete@
 
-h3. AdminAppController
+h3. PanelAppController
 
-A classe AdminAppController provê todos os métodos necessários para o CRUD do painel de controle, ele utiliza todos os métodos do behavior acima, então é necessário que o model deste controller utilize o mesmo:
+A classe PanelAppController provê todos os métodos necessários para o CRUD do painel de controle, ele utiliza todos os métodos do behavior acima, então é necessário que o model deste controller utilize o mesmo:
 # @admin_index@
 # @admin_view@
 # @admin_edit@

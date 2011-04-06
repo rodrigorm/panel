@@ -1,5 +1,5 @@
 <?php
-App::import('Behavior', 'Admin.AdminCrud');
+App::import('Behavior', 'Panel.AdminCrud');
 
 class User extends Model {
 	public $name = 'User';
