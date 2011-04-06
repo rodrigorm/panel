@@ -1,0 +1,70 @@
+h1. Admin Plugin
+
+Plugin com métodos base para uma prototipagem rápida de um painel de controle.
+
+h2. Background
+
+Depois de utilizar o plugin "templates":http://github.com/cakedc/templates do "CakeDC":http://github.com/cakedc percebi que eu praticamente não alterava os códigos por ele gerado, então resolvi criar esse plugin para já manter esse código de forma centralizada e então só extender quando a classe necessitar de um código mais específico.
+
+h2. Requisitos
+
+* PHP 5+
+* CakePHP 1.3+
+
+h2. Instalação
+
+_[Manual]_
+
+# Baixe o arquivo: http://github.com/rodrigorm/admin/zipball/master
+# Descompacte
+# Copiar a pasta para app/plugins
+# Renomear a pasta que acabou de copiar para @admin@
+
+_[GIT Submodule]_
+
+Na pasta @app@ da aplicação digite:
+<pre><code>git submodule add git://github.com/rodrigorm/admin.git plugins/admin
+git submodule init
+git submodule update
+</code></pre>
+
+_[GIT Clone]_
+
+Na pasta @plugin@ da sua aplicação digite:
+<pre><code>git clone git://github.com/rodrigorm/admin.git admin</code></pre>
+
+h2. Utilização
+
+A maneira mais fácil de utilizar o plugin é primeiro ativar o behavior na classe AppModel:
+
+<pre><code>class AppModel extends Model {
+	public $actsAs = array(
+		'Admin.AdminCrud'
+	);
+}</code></pre>
+
+Em seguida pra cada controller que desejar um CRUD basta extender a classe AdminAppController:
+
+<pre><code>App::import('Controller', 'Admin.App');
+
+class UsersController extends AdminAppController {}
+</code></pre>
+
+Agora é só criar as views manualmente ou utilizando o @bake@.
+
+h3. AdminCrudBehavior
+
+Este behavior provê métodos para o CRUD do painel de controle:
+# @adminView@
+# @adminAdd@
+# @adminEdit@
+# @adminValidateAndDelete@
+
+h3. AdminAppController
+
+A classe AdminAppController provê todos os métodos necessários para o CRUD do painel de controle, ele utiliza todos os métodos do behavior acima, então é necessário que o model deste controller utilize o mesmo:
+# @admin_index@
+# @admin_view@
+# @admin_edit@
+# @admin_add@
+# @admin_delete@
