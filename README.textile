@@ -1,4 +1,4 @@
-h1. Admin Plugin
+h1. Panel Plugin
 
 Plugin com métodos base para uma prototipagem rápida de um painel de controle.
 
@@ -15,15 +15,15 @@ h2. Instalação
 
 _[Manual]_
 
-# Baixe o arquivo: http://github.com/rodrigorm/admin/zipball/master
+# Baixe o arquivo: http://github.com/rodrigorm/panel/zipball/master
 # Descompacte
 # Copiar a pasta para app/plugins
-# Renomear a pasta que acabou de copiar para @admin@
+# Renomear a pasta que acabou de copiar para @panel@
 
 _[GIT Submodule]_
 
 Na pasta @app@ da aplicação digite:
-<pre><code>git submodule add git://github.com/rodrigorm/admin.git plugins/admin
+<pre><code>git submodule add git://github.com/rodrigorm/panel.git plugins/panel
 git submodule init
 git submodule update
 </code></pre>
@@ -31,7 +31,7 @@ git submodule update
 _[GIT Clone]_
 
 Na pasta @plugin@ da sua aplicação digite:
-<pre><code>git clone git://github.com/rodrigorm/admin.git admin</code></pre>
+<pre><code>git clone git://github.com/rodrigorm/panel.git panel</code></pre>
 
 h2. Utilização
 
