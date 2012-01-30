@@ -1,4 +1,6 @@
 <?php
+App::uses('AppController', 'Controller');
+
 class PanelAppController extends AppController {
 	public function admin_index() {
 		$this->{$this->modelClass}->recursive = 0;
@@ -19,7 +21,7 @@ class PanelAppController extends AppController {
 		try {
 			$result = $this->{$this->modelClass}->adminEdit($id, $this->data);
 			if ($result === true) {
-				$this->Session->setFlash(sprintf(__('%s saved', true), $this->__singularHumanName($this->modelClass)));
+				$this->Session->setFlash(sprintf(__('%s saved'), $this->__singularHumanName($this->modelClass)));
 				$alias = $this->{$this->modelClass}->alias;
 				$this->redirect(array('action' => 'view', $this->{$this->modelClass}->data[$alias]['id']));
 			} else {
@@ -35,7 +37,7 @@ class PanelAppController extends AppController {
 		try {
 			$result = $this->{$this->modelClass}->adminAdd($this->data);
 			if ($result === true) {
-				$this->Session->setFlash(sprintf(__('The %s has been saved', true), $this->__singularHumanName($this->modelClass)));
+				$this->Session->setFlash(sprintf(__('The %s has been saved'), $this->__singularHumanName($this->modelClass)));
 				$this->redirect(array('action' => 'index'));
 			}
 		} catch (OutOfBoundsException $e) {
@@ -50,7 +52,7 @@ class PanelAppController extends AppController {
 		try {
 			$result = $this->{$this->modelClass}->adminValidateAndDelete($id, $this->data);
 			if ($result === true) {
-				$this->Session->setFlash(sprintf(__('%s deleted', true), $this->__singularHumanName($this->modelClass)));
+				$this->Session->setFlash(sprintf(__('%s deleted'), $this->__singularHumanName($this->modelClass)));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->set($this->__singularName($this->modelClass), $result);

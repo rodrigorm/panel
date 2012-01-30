@@ -17,7 +17,7 @@ class AdminCrudBehavior extends ModelBehavior {
 
 	private function __validateError($Model) {
 		$humanize = Inflector::humanize(Inflector::underscore($Model->alias));
-		$message = sprintf(__('Could not save the %s, please check your inputs.', true), $humanize);
+		$message = sprintf(__('Could not save the %s, please check your inputs.'), $humanize);
 		return new OutOfBoundsException($message);
 	}
 
@@ -79,13 +79,13 @@ class AdminCrudBehavior extends ModelBehavior {
 
 	private function __invalidError($Model) {
 		$humanize = Inflector::humanize(Inflector::underscore($Model->alias));
-		$message = sprintf(__('Invalid %s', true), $humanize);
+		$message = sprintf(__('Invalid %s'), $humanize);
 		return new OutOfBoundsException($message);
 	}
 
 	private function __confirmationError($Model) {
 		$humanize = Inflector::humanize(Inflector::underscore($Model->alias));
-		$message = sprintf(__('You need to confirm to delete this %s', true), $humanize);
-		throw new Exception($message);
+		$message = sprintf(__('You need to confirm to delete this %s'), $humanize);
+		throw new UnexpectedValueException($message);
 	}
 }

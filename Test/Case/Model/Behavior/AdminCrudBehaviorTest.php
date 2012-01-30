@@ -1,5 +1,6 @@
 <?php
-App::import('Behavior', 'Panel.AdminCrud');
+App::Uses('AdminCrudBehavior', 'Panel.Model/Behavior');
+App::uses('Model', 'Model');
 
 class User extends Model {
 	public $name = 'User';
@@ -13,9 +14,9 @@ class User extends Model {
 	);
 }
 
-class AdminCrudTestCase extends CakeTestCase {
+class AdminCrudBehaviorTest extends CakeTestCase {
 	public $fixtures = array(
-		'plugin.admin.user'
+		'plugin.panel.user'
 	);
 
 	public function startTest($method) {
@@ -45,22 +46,26 @@ class AdminCrudTestCase extends CakeTestCase {
 		$this->assertTrue($result);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Could not save the User, please check your inputs.
+ */
 	public function testAdminAddInvalid() {
 		$data = $this->record;
 		unset($data['User']['id']);
 		unset($data['User']['name']);
-
-		$this->expectException(new OutOfBoundsException('Could not save the User, please check your inputs.'));
 		$this->AdminCrud->adminAdd($this->User, $data);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Could not save the Operator, please check your inputs.
+ */
 	public function testAdminAddExceptionWithAnotherAlias() {
 		$data = $this->record;
 		unset($data['User']['id']);
 		unset($data['User']['name']);
 		$this->User->alias = 'Operator';
-
-		$this->expectException(new OutOfBoundsException('Could not save the Operator, please check your inputs.'));
 		$this->AdminCrud->adminAdd($this->User, $data);
 	}
 
@@ -91,13 +96,19 @@ class AdminCrudTestCase extends CakeTestCase {
 		$this->assertEqual($result, $data);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Invalid User
+ */
 	public function testAdminEditWithWrongId() {
-		$this->expectException(new OutOfBoundsException('Invalid User'));
 		$this->AdminCrud->adminEdit($this->User, 'wrong_id', $this->record);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Invalid Operator
+ */
 	public function testAdminEditExceptionWithAnotherAlias() {
-		$this->expectException(new OutOfBoundsException('Invalid Operator'));
 		$this->User->alias = 'Operator';
 		$this->AdminCrud->adminEdit($this->User, 'wrong_id', $this->record);
 	}
@@ -108,8 +119,11 @@ class AdminCrudTestCase extends CakeTestCase {
 		$this->assertEqual($result['User']['id'], 1);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Invalid User
+ */
 	public function testAdminViewWithWrongId() {
-		$this->expectException(new OutOfBoundsException('Invalid User'));
 		$this->AdminCrud->adminView($this->User, 'wrong_id');
 	}
 
@@ -123,13 +137,19 @@ class AdminCrudTestCase extends CakeTestCase {
 		$this->assertTrue($result);
 	}
 
+/**
+ * @expectedException OutOfBoundsException
+ * @expectedExceptionMessage Invalid User
+ */
 	public function testAdminValidateAndDeleteWithWrongId() {
-		$this->expectException(new OutOfBoundsException('Invalid User'));
 		$this->AdminCrud->adminValidateAndDelete($this->User, 'wrogn_id', array());
 	}
 
+/**
+ * @expectedException UnexpectedValueException
+ * @expectedExceptionMessage You need to confirm to delete this User
+ */
 	public function testAdminValidateAndDeleteWithoutConfirmation() {
-		$this->expectException(new Exception('You need to confirm to delete this User'));
 		$postData = array(
 			'User' => array(
 				'confirm' => 0
@@ -138,8 +158,11 @@ class AdminCrudTestCase extends CakeTestCase {
 		$this->AdminCrud->adminValidateAndDelete($this->User, 1, $postData);
 	}
 
+/**
+ * @expectedException UnexpectedValueException
+ * @expectedExceptionMessage You need to confirm to delete this Operator
+ */
 	public function testAdminValidateAndDeleteWithoutConfirmationAnotherAlias() {
-		$this->expectException(new Exception('You need to confirm to delete this Operator'));
 		$postData = array(
 			'Operator' => array(
 				'confirm' => 0

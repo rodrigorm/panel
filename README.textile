@@ -9,7 +9,7 @@ Depois de utilizar o plugin "templates":http://github.com/cakedc/templates do "C
 h2. Requisitos
 
 * PHP 5+
-* CakePHP 1.3+
+* CakePHP 2.0+
 
 h2. Instalação
 
@@ -18,12 +18,12 @@ _[Manual]_
 # Baixe o arquivo: http://github.com/rodrigorm/panel/zipball/master
 # Descompacte
 # Copiar a pasta para app/plugins
-# Renomear a pasta que acabou de copiar para @panel@
+# Renomear a pasta que acabou de copiar para @Panel@
 
 _[GIT Submodule]_
 
 Na pasta @app@ da aplicação digite:
-<pre><code>git submodule add git://github.com/rodrigorm/panel.git plugins/panel
+<pre><code>git submodule add git://github.com/rodrigorm/panel.git plugins/Panel
 git submodule init
 git submodule update
 </code></pre>
@@ -31,7 +31,7 @@ git submodule update
 _[GIT Clone]_
 
 Na pasta @plugin@ da sua aplicação digite:
-<pre><code>git clone git://github.com/rodrigorm/panel.git panel</code></pre>
+<pre><code>git clone git://github.com/rodrigorm/panel.git Panel</code></pre>
 
 h2. Utilização
 

@@ -18,14 +18,14 @@ class UsersController extends PanelAppController {
 	}
 }
 
-class PanelAppControllerTestCase extends CakeTestCase {
+class PanelAppControllerTest extends ControllerTestCase {
 	public $fixtures = array(
 		'plugin.panel.user'
 	);
 
 	public function startTest($method) {
 		parent::startTest($method);
-		$this->Users = new UsersController();
+		$this->Users = $this->generate('Users');
 		$this->Users->constructClasses();
 		$this->Users->params = array(
 			'named' => array(),
@@ -83,7 +83,7 @@ class PanelAppControllerTestCase extends CakeTestCase {
 
 	public function testAdminAdd() {
 		$this->Users->data = $this->record;
-		unset($this->Users->data['User']['id']);
+		unset($this->Users->request->data['User']['id']);
 		$this->Users->admin_add();
 		$this->assertEqual($this->Users->redirect, array('action' => 'index'));
 		$this->assertFlash('The User has been saved');
